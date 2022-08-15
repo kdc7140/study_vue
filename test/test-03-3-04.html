@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 이벤트 버스 사용해서 컴포넌트간 데이터 주고 받기 샘플 -->
+    <div id="app">
+        <child-component1></child-component1>
+        <child-component2></child-component2>
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+
+    <script>
+        var eventBus = new Vue();
+
+        Vue.component('child-component1', {
+            template: '<div>인스턴스 이벤트 전달.<button v-on:click="sendData">show</button></div>',
+            methods: {
+                sendData: function() {
+                    eventBus.$emit('triggerEventBus', 100);
+                }
+            },
+        });
+
+        // Vue.component('child-component2', {
+        //     template: '<h1>Hello Vue!!</h1>',
+        //     mounted : function(){
+        //         eventBus.$on('triggerEventBus', function(value){
+        //             console.log("이벤트를 전달 받음. 전달 받은 값 : ", value);
+        //             document.querySelector('h1').innerHTML = value;
+        //         });
+        //     },
+        // });
+
+        var app = new Vue({
+            el : '#app',
+            components : {
+                'child-component2' :{
+                    template : '<h1>Hello Vue!!</h1>',
+                    mounted : function(){
+                        eventBus.$on('triggerEventBus', function(value){
+                            console.log("이벤트를 전달 받음. 전달 받은 값 : ", value);
+                            document.querySelector('h1').innerHTML = value;
+                        });
+                    }
+                }
+            }
+        });
+        
+    </script>
+</body>
+</html>
