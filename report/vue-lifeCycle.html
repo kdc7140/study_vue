@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let vueObj = new Vue({
+            el : '#app',
+            data : {
+                message : "vue_lisrCycle",
+            },
+            beforeCreate : function(){
+                console.log("beforeCreate");
+            },
+            created : function(){
+                console.log("created");
+            },
+            beforeMount : function(){
+                console.log("beforeMount");
+            },
+            mounted : function(){
+                console.log("mounted");
+                this.message = "Test life Cycle";
+            },
+            beforeUpdate : function(){
+                console.log("beforeUpdate");
+            },
+            updated : function(){
+                console.log("updated");
+            },
+            beforeDestroy : function(){
+                console.log("beforeDestroy");
+            },
+            destroyed : function(){
+                console.log("destroyed");
+            }
+        });
+
+    </script>
+</body>
+</html>
