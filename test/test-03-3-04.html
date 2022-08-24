@@ -28,29 +28,18 @@
             },
         });
 
-        // Vue.component('child-component2', {
-        //     template: '<h1>Hello Vue!!</h1>',
-        //     mounted : function(){
-        //         eventBus.$on('triggerEventBus', function(value){
-        //             console.log("이벤트를 전달 받음. 전달 받은 값 : ", value);
-        //             document.querySelector('h1').innerHTML = value;
-        //         });
-        //     },
-        // });
+        Vue.component('child-component2', {
+            template: '<h1>백</h1>',
+            mounted : function(){
+                eventBus.$on('triggerEventBus', function(value){
+                    console.log("이벤트를 전달 받음. 전달 받은 값 : ", value);
+                    document.querySelector('h1').innerHTML = value;
+                });
+            },
+        });
 
         var app = new Vue({
             el : '#app',
-            components : {
-                'child-component2' :{
-                    template : '<h1>Hello Vue!!</h1>',
-                    mounted : function(){
-                        eventBus.$on('triggerEventBus', function(value){
-                            console.log("이벤트를 전달 받음. 전달 받은 값 : ", value);
-                            document.querySelector('h1').innerHTML = value;
-                        });
-                    }
-                }
-            }
         });
         
     </script>
