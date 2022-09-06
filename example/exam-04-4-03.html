@@ -7,7 +7,7 @@
   </head>
   <body>
     <div id="app">
-      <app-header name="header"></app-header>
+      <router-view name="header"></router-view>
       <router-view></router-view>
       <router-view name="footer"></router-view>
     </div>
@@ -18,7 +18,7 @@
     <script>
       var Body = { template: '<div>This is Body</div>' };
       var Header = { template: '<div>This is Header</div>' };
-      var Footer = { template: '<div>This is Footer</div>' };
+      var Footer = { template: '<div>This is Footer<router-view></router-view></div>' };
 
       var router = new VueRouter({
         routes: [

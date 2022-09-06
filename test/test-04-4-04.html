@@ -8,15 +8,20 @@
 </head>
 <body>
     <div id="app">
+        <p>
+            <router-link to="/test">go test</router-link>
+            <router-link to="/test/login">go login</router-link>
+        </p>
+
         <router-view name="header"></router-view>
         <router-view></router-view>
         <router-view name="footer"></router-view>
-        </div>
+    </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
-        <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
 
-        <script>
+    <script>
         var Body = { template: '<div>This is Body</div>' };
         var Header = { template: '<div>This is Header</div>' };
         var Footer = { template: '<div>This is Footer</div>' };
@@ -28,7 +33,7 @@
         var router = new VueRouter({
             routes: [
                 {
-                    path: '/',
+                    path: '/test',
                     components: {
                         default: Body,
                         header: Header,
@@ -36,7 +41,7 @@
                     }
                 },
                 {
-                    path: '/login',
+                    path: '/test/login',
                     components: {
                     default: LoginBody,
                     header: LoginHeader,
@@ -49,6 +54,6 @@
         var app = new Vue({
             router
         }).$mount('#app');
-        </script>
+    </script>
 </body>
 </html>
