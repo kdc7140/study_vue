@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<title>Vue with Axios Sample</title>
+	</head>
+	<body>
+		<div id="app">
+			<button v-on:click="getData">get User</button>
+            <div>{{ users }}</div>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script>
+			new Vue({
+				el: '#app',
+                data : {
+                    users : []
+                },
+				methods: {
+					getData: function() {
+                        var vm = this;
+						axios.get('https://jsonplaceholder.typicode.com/users')
+							.then(function(response) {
+								console.log(...response.data);
+                                vm.users = response.data;
+							})
+                            .catch(function(error){
+                                cosole.log(error);
+                            });
+					}
+				}
+			});
+		</script>
+	</body>
+</html>
