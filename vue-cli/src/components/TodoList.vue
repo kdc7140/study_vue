@@ -1,7 +1,7 @@
 <template>
     <section>
         <transition-group name="list" tag="ul">
-            <li v-for="(todoItem, idx) in propsdata" v-bind:key="todoItem" class="shadow"> 
+            <li v-for="(todoItem, idx) in this.$store.state.todoItems" v-bind:key="todoItem.item" class="shadow"> 
                 <i calss="checkBtn fas fa=check" aria-hidden="true"></i>
                 {{ todoItem}}
                 <span class="removeBtn" type="button" @click="removeTodo(todoItem, idx)">
@@ -15,19 +15,6 @@
 <script>
 
 export default ({
-    // data(){
-    //     return{
-    //         todoItems : []
-    //     }
-    // },
-    // created() {
-    //     if(localStorage.length > 0){
-    //         for(var i=0; i<localStorage.length; i++){
-    //             this.todoItems.push(localStorage.key(i));   //키 값 가져오기
-    //             // this.todoItems.push(localStorage.getItem(localStorage.key(i))); //value 값 가져오기
-    //         }
-    //     }
-    // },
     methods : {
         removeTodo(todoItem, idx){
             console.log(todoItem, idx);
@@ -36,7 +23,6 @@ export default ({
             this.$emit('removeTodo', todoItem, idx);
         }
     },
-    props:['propsdata']
 })
 </script>
 

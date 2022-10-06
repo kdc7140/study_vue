@@ -34,9 +34,11 @@ export default ({
             console.log(this.newTodoItem);
 
             if(this.newTodoItem !== ""){
-                var value = this.newTodoItem && this.newTodoItem.trim();
+                let value = this.newTodoItem && this.newTodoItem.trim();
                 // localStorage.setItem(value, value);
-                this.$emit('addTodo', value);
+                // this.$emit('addTodo', value);
+                const text = this.newTodoItem.trim();
+                this.$store.commit('addOneItem', text);
                 this.clearInput();
             }else{
                 this.showModal = !this.showModal;

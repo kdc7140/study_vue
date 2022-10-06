@@ -22,7 +22,7 @@ export default({
   },
   created() {
       if(localStorage.length > 0){
-          for(var i=0; i<localStorage.length; i++){
+          for(let i=0; i<localStorage.length; i++){
               this.todoItems.push(localStorage.key(i));   //키 값 가져오기
               // this.todoItems.push(localStorage.getItem(localStorage.key(i))); //value 값 가져오기
           }
