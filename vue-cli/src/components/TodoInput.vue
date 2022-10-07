@@ -34,7 +34,7 @@ export default ({
             console.log(this.newTodoItem);
 
             if(this.newTodoItem !== ""){
-                let value = this.newTodoItem && this.newTodoItem.trim();
+                // let value = this.newTodoItem && this.newTodoItem.trim();
                 // localStorage.setItem(value, value);
                 // this.$emit('addTodo', value);
                 const text = this.newTodoItem.trim();

@@ -1,9 +1,9 @@
 <template>
     <section>
         <transition-group name="list" tag="ul">
-            <li v-for="(todoItem, idx) in this.$store.state.todoItems" v-bind:key="todoItem.item" class="shadow"> 
-                <i calss="checkBtn fas fa=check" aria-hidden="true"></i>
-                {{ todoItem}}
+            <li v-for="(todoItem, idx) in this.$store.state.todoItems" v-bind:key="todoItem" class="shadow"> 
+                <i class="checkBtn fas fa=check" aria-hidden="true"></i>
+                {{ todoItem }}
                 <span class="removeBtn" type="button" @click="removeTodo(todoItem, idx)">
                     <i class="far fa-trash-alt" aria-hidden="true"></i>
                 </span>
