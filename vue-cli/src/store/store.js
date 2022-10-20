@@ -10,6 +10,7 @@ const storage = {
             for (var i = 0; i < localStorage.length; i++) {
                 if(localStorage.key(i) !== 'loglevel:webpack-dev-server'){
                     // this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+                    console.log(localStorage.key(i));
                     arr.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
                 }
             }
@@ -24,19 +25,23 @@ export const store = new Vuex.Store({
     },
     mutations : {
         addOneItem(state, todoItem){
-            console.log('store.js -> call addOneItem');
-            // const obj = {completed : false, item: todoItem};
-            // localStorage.setItem(todoItem,todoItem);
-            // state.todoItems.push(obj);      //state의 인자에 접근
-
-            localStorage.setItem(todoItem, todoItem);    // key, value
-            // this.todoItems.push(todoItem);
-            state.todoItems.push(todoItem);
+            let obj = {completed : false, item:todoItem}
+            localStorage.setItem(todoItem, JSON.stringify(obj));    // key, value
+            state.todoItems.push(obj);
         },
-        addTodo(state, todoItem) {
-            localStorage.setItem(todoItem, todoItem);    // key, value
-            // this.todoItems.push(todoItem);
-            state.todoItems.push(todoItem);
+        removeOneItem(state, payload){
+            localStorage.removeItem(payload.todoItem);
+            state.todoItems.splice(payload,1);
+        },
+        toggleOneItem(state, payload){
+            state.todoItems[payload.idx].completed = !state.todoItems[payload.idx].completed;
+            //로컬 스토리지의 데이터를 갱신
+            localStorage.removeItem(payload.todoItem.item);
+            localStorage.setItem(payload.todoItem.item, JSON.stringify(payload.todoItem));
+        },
+        clearAllItems(state){
+            localStorage.clear();
+            state.todoItems = [];
         }
     }
 });

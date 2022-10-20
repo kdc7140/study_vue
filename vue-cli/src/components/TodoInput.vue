@@ -2,19 +2,16 @@
     <div class="inputBox shadow">
         <input type="text" v-model="newTodoItem" placeholder="Type what you have to do" v-on:keyup.enter="addTodo">
         <span class="addContainer" v-on:click="addTodo">
-            <i class="addBtn fas fa-plus" aria-hidden="true"></i>
+            <i class="addBtn fas fa-plus"></i>
         </span>
 
-        <modal v-if="showModal" @close="showModal = false">
+        <Modal v-if="showModal" @close="showModal = false">
             <!-- 모달 헤더 -->
-            <h3 slot="header">경고</h3>  
-            <!-- 모달 푸터 -->
-            <span slot="footer" @click="showModal = false">
-                할 일을 입력하세요.
-                <i class="closeModalBtn fas fa-times" aria-hidden="true"></i>
-            </span>
-        </modal>
-
+            <h3 slot="header">경고<i class="closeModalBtn fas fa-times" @clisk="showModal"></i></h3>  
+            <div slot="body">
+                아무것도 입력하지 않으셨습니다. 
+            </div>
+        </Modal>
     </div>
 </template>
 
@@ -22,7 +19,6 @@
 import Modal from './common/Modal.vue'
 
 export default ({
-    props : ['propsdata'],
     data(){
         return {
             newTodoItem : '',
@@ -34,11 +30,7 @@ export default ({
             console.log(this.newTodoItem);
 
             if(this.newTodoItem !== ""){
-                // let value = this.newTodoItem && this.newTodoItem.trim();
-                // localStorage.setItem(value, value);
-                // this.$emit('addTodo', value);
-                const text = this.newTodoItem.trim();
-                this.$store.commit('addOneItem', text);
+                this.$store.commit('addOneItem', this.newTodoItem);
                 this.clearInput();
             }else{
                 this.showModal = !this.showModal;

@@ -1,11 +1,12 @@
 <template>
     <section>
         <transition-group name="list" tag="ul">
-            <li v-for="(todoItem, idx) in this.$store.state.todoItems" v-bind:key="todoItem" class="shadow"> 
-                <i class="checkBtn fas fa=check" aria-hidden="true"></i>
-                {{ todoItem }}
-                <span class="removeBtn" type="button" @click="removeTodo(todoItem, idx)">
-                    <i class="far fa-trash-alt" aria-hidden="true"></i>
+            <li v-for="(todoItem, idx) in this.$store.state.todoItems" v-bind:key="todoItem.item" class="shadow"> 
+                <i class="checkBtn fas fa-check" v-bind:class="{chenckBtnCompleted: todoItem.completed}" 
+                    v-on:click="toggleComplete(todoItem, idx)"></i>
+                <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
+                <span class="removeBtn" type="button" v-on:click="removeTodo(todoItem, idx)">
+                    <i class="far fa-trash-alt"></i>
                 </span>
             </li>
         </transition-group>
@@ -18,9 +19,10 @@ export default ({
     methods : {
         removeTodo(todoItem, idx){
             console.log(todoItem, idx);
-            // localStorage.removeItem(todoItem);
-            // this.todoItems.splice(idx, 1);
-            this.$emit('removeTodo', todoItem, idx);
+            this.$store.commit('removeOneItem', {todoItem, idx});
+        },
+        toggleComplete(todoItem, idx){
+            this.$store.commit('toggleOneItem', {todoItem, idx});
         }
     },
 })
@@ -54,6 +56,13 @@ export default ({
         line-height: 45px;
         color: #62acde;
         margin-right: 5px;
+    }
+    .chenckBtnCompleted {
+        color: #b3adad;
+    }
+    .textCompleted {
+        text-decoration: line-through;
+        color: #b3adad;
     }
     .removeBtn{
         margin-left: auto;
