@@ -1,15 +1,20 @@
 <template>
     <header>
-        <h1> TODO it!! </h1>
+        <h1> {{ this.headerText }}</h1>
     </header>
 </template>
 
 <script>
+import { mapState } from "vuex";
 
 export default ({
-
+    computed : {
+        ...mapState(['headerText']),
+    }
 })
+
 </script>
+
 
 <style scoped>
     h1 {
