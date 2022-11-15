@@ -1,28 +1,42 @@
 <template>
     <div>
-        <div v-for='ask in askList'>{{ ask.title }}</div>
+      <p v-for='item in fetchedAsk'>
+        <a v-bind:href="item.url">{{ item.title }}</a>
+        <small>{{ item.time_ago }} by {{ item.user }}</small>
+      </p>
     </div>
 </template>
 
 <script>
 
-import { fetchAskList } from '../api/index.js';
+// import { fetchAskList } from '../api/index.js';
+// import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
-  data(){
-    return{
-      askList : []
-    }
+  computed : {
+    // #4. 배열 표현법 -> store의 getters에서 선언한 함수명을 직접 갖다 쓸 수 있음
+    ...mapGetters([
+      'fetchedAsk'
+    ])
+
+    // #3. 객체표현법 -> 상단 for문이 askItems 변수로 들어감
+    // ...mapGetters({
+    //   askItems : 'fetchedAsk'
+    // })
+
+    // #2.
+    // ...mapState({
+    //   fetchedAsk : state => state.ask
+    // })
+
+    // #1.
+    // ask() {
+    //   return this.$store.state.ask
+    // }
   },
   created(){
-    fetchAskList()
-      .then(response => {
-        console.log(response);
-        this.askList = response.data;
-      })
-      .catch(error => {
-        console.log(error);
-      })
+    this.$store.dispatch('FETCH_ASK');
   }
 }
 </script>
