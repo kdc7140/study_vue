@@ -11,11 +11,18 @@ export const store = new Vuex.Store({
         news : [],
         jobs : [],
         ask : [],
+        user : {},
+        item : [],
     },
     //computed와 동일한 속성이지만 store에 있음
     getters : {
         fetchedAsk(state){
+            console.log(state);
             return state.ask;
+        },
+        fetchedItem(state){
+            console.log(state);
+            return state.item;
         }
     },
     mutations : mutations,  //export 한 mutatinos를 상단에 import하고 불러씀

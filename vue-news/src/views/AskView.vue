@@ -1,7 +1,10 @@
 <template>
     <div>
       <p v-for='item in fetchedAsk'>
-        <a v-bind:href="item.url">{{ item.title }}</a>
+        <!-- <a v-bind:href="item.url">{{ item.title }}</a> -->
+        <router-link :to="`/item/${item.id}`">
+          {{ item.title }}
+        </router-link>
         <small>{{ item.time_ago }} by {{ item.user }}</small>
       </p>
     </div>
@@ -16,9 +19,7 @@ import { mapGetters } from 'vuex';
 export default {
   computed : {
     // #4. 배열 표현법 -> store의 getters에서 선언한 함수명을 직접 갖다 쓸 수 있음
-    ...mapGetters([
-      'fetchedAsk'
-    ])
+    ...mapGetters(['fetchedAsk'])
 
     // #3. 객체표현법 -> 상단 for문이 askItems 변수로 들어감
     // ...mapGetters({
@@ -36,6 +37,7 @@ export default {
     // }
   },
   created(){
+    console.log('ask');
     this.$store.dispatch('FETCH_ASK');
   }
 }
