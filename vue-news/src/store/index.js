@@ -11,7 +11,7 @@ export const store = new Vuex.Store({
         news : [],
         jobs : [],
         ask : [],
-        user : {},
+        user: {},
         item : [],
     },
     //computed와 동일한 속성이지만 store에 있음
@@ -20,8 +20,7 @@ export const store = new Vuex.Store({
             console.log(state);
             return state.ask;
         },
-        fetchedItem(state){
-            console.log(state);
+        fetchedItem(state) {
             return state.item;
         }
     },

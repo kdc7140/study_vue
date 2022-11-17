@@ -1,49 +1,65 @@
 <template>
-  <div>
-    <section>
-		<div>
-			<div>
-				{{ itemInfo }}
-			</div>
-			<div>
-				<router-link :to="`/user${fetchedItem.user}`">
-					{{ fetchedItem.user}}
-				</router-link>
+    <div>
+		<!-- 질문 상세 정보 -->
+		<section>
+			<div class="user-container">
 				<div>
-					{{fetchedItem.time_ago}}
+					<i class="fas fa-user"></i>
+				</div>
+				<div class="user-description">
+					<router-link v-bind:to="`/user/${fetchedItem.user}`">
+						{{ fetchedItem.user }}
+					</router-link>
+					<div class="time">
+						{{ fetchedItem.time_ago }}
+					</div>
 				</div>
 			</div>
 			<h2>{{ fetchedItem.title }}</h2>
-		</div>
-	</section>
-	<section>
+		</section>
 
-	</section>
-  </div>
+		<!-- 질문 댓글 -->
+		<section>
+			<div v-html="fetchedItem.content">
+				<!--{{ fetchedItem.content }}-->
+			</div>
+			
+		</section>
+
+		<!--<p>{{ this.$store.state.item.title }}</p>
+		<div>{{ this.$store.state.item.content }}</div>-->
+
+	</div>
 </template>
-
 
 <script>
 import { mapGetters } from 'vuex';
 
 export default {
-  computed : {
-    ...mapGetters(['fetchedItem']),
-	itemInfo(){
-      return this.$store.state.item;
-    }
-  },
-  created() {
-    const itemId = this.$route.params.id;
-    console.log(itemId);
-    // axios.get(`https://api.hnpwa.com.v0/user${this.$route.params.id}.json`);
-    this.$store.dispatch('FETCH_ITEM', itemId);
-  }
-}
+	computed : {
+		...mapGetters(['fetchedItem']),
+	},
+	created(){
+		const itemId = this.$route.params.id;
+		console.log(itemId);
+		this.$store.dispatch('FETCH_ITEM', itemId);
+	}
+};
 </script>
 
-
-
-<style>
-
+<style scoped>
+	.user-container{
+		display: flex;
+		align-items: center;
+		padding: 0.5rem;
+	}
+	.fa-user{
+		font-size: 2.5rem;
+	}
+	.user-description{
+		padding-left: 8px;
+	}
+	.time{
+		font-size: 0.7rem;
+	}
 </style>
