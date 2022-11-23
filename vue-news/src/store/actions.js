@@ -1,6 +1,6 @@
 import { fetchNewsList } from '../api/index.js';
 import { fetchJobsList } from '../api/index.js';
-import { fetchAskList } from '../api/index.js';
+import { fetchAskList  } from '../api/index.js';
 import { fetchUserInfo } from '../api/index.js';
 import { fetchItemInfo } from '../api/index.js';
 
@@ -11,7 +11,6 @@ export default{
             .then(response => {
                 console.log(response.data);
                 context.commit('SET_NEWS', response.data);
-                this.state.news = response.data;
             })
             .catch(error => {
                 console.log(error);

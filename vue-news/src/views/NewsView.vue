@@ -22,12 +22,13 @@
 // import { fetchNewsList } from '../api/index.js';
 
 export default {
-  data(){
-    return{
-      users : []
-    }
-  },
+  //data(){
+  //  return{
+  //    users : []
+  //  }
+  //},
   created(){
+    console.log("component");
     this.$store.dispatch('FETCH_NEWS');
   }
 }

@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
-import { store } from './store/store.js'
+import { stor } from './store/store.js'
 
 Vue.config.productionTip = false
 
 new Vue({
   el : '#kdc',
-  store,
+  stor,
   render: h => h(App),
 });
