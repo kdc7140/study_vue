@@ -1,28 +1,32 @@
 <template>
 	<div>
-		<p v-for="job in this.$store.state.jobs">
-			<a v-bind:href="job.url">{{ job.title }}</a>
-			<small>{{ job.time_ago }}, {{ job.domain }}</small>
-		</p>
+		<list-item></list-item>
+		<!--<ul class="news-list">
+			<li v-for="job in this.$store.state.jobs" class="post">
+				<div class="points">
+					{{ job.points || 0 }}
+				</div>
+				<div>
+					<p class="news-title">
+						<a v-bind:href="job.url">{{ job.title }}</a>
+					</p>
+					<small class="link-text">
+                        {{ job.time_ago }}
+                        <a v-bind:href="job.url">{{ job.domain }}</a>
+					</small>
+				</div>
+			</li>
+		</ul>-->
 	</div>
 </template>
 
 <script>
+import ListItem from '../components/ListItem.vue';
 //import { fetchJobsList } from "../api/index.js";
 
 export default {
-	created() {
-		this.$store.dispatch("FETCH_JOBS");
-		// fetchJobsList()
-		//   .then(response => {
-		//     console.log(response);
-		//     this.jobsList = response.data;
-		//   })
-		//   .catch(error => {
-		//     console.log(error);
-		//   })
-	},
+	components : {
+		ListItem,
+	}
 };
 </script>
-
-<style></style>

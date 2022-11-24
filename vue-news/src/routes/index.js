@@ -9,33 +9,36 @@ import ItemView from '../views/ItemView.vue';
 Vue.use(VueRouter);
 
 export const router = new VueRouter({
-    mode : 'history',
-    routes : [
+    mode: "history",
+    routes: [
         {
-            path : '/',
-            redirect : '/news'
+            path: "/",
+            redirect: "/news",
         },
         {
             //path : url 주소
-            path : '/news',
+            path: "/news",
             //component : url 주소로 갔을 때 표시될 컴포넌트
-            component : NewsView,
+            component: NewsView,
+            name: "news",
         },
         {
-            path : '/ask',
-            component : AskView,
+            path: "/ask",
+            component: AskView,
+            name: "ask",
         },
         {
-            path : '/jobs',
-            component : JobsView,
+            path: "/jobs",
+            component: JobsView,
+            name: "jobs",
         },
         {
-            path : '/user/:id',
-            component : UserView,
+            path: "/user/:id",
+            component: UserView,
         },
         {
-            path : '/item/:id',
-            component : ItemView,
+            path: "/item/:id",
+            component: ItemView,
         },
-    ]
-})
+    ],
+});
