@@ -52,9 +52,5 @@ export default {
         //   return this.$store.state.ask
         // }
     },
-    created() {
-        console.log("ask");
-        this.$store.dispatch("FETCH_ASK");
-    },
 };
 </script>
