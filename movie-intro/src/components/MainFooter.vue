@@ -1,6 +1,10 @@
 <template>
   <div class="footer">
-	<div><img src="../assets/icon_home.png"></div>
+	<div>
+		<router-link to="/main">
+			<img src="../assets/icon_home.png">
+		</router-link>
+	</div>
 	<div><img src="../assets/icon_recyle_list.png"></div>
 	<div><img src="../assets/icon_save_list.png"></div>
   </div>
@@ -17,6 +21,7 @@ export default {
 .footer{
 	background-color: black;
 	color : white;
+	text-align: center;
 }
 
 .footer div{
@@ -28,5 +33,9 @@ export default {
 .footer div img{
 	width : 50px;
 }
+
+/*.footer div router-link img{
+	width : 50px;
+}*/
 
 </style>

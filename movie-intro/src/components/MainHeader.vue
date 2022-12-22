@@ -1,8 +1,9 @@
 <template>
   <div class="header">
 	<img src="../assets/logo.png">
-    <router-link to="#">리스트로 보기</router-link>
+    <router-link to="/list">리스트로 보기</router-link>
     <router-link to="#">이미지로 보기</router-link>
+
   </div>
 </template>
 
@@ -25,16 +26,27 @@ export default {
 		object-position: center left;
 		margin: 0 10px 0 10px; 
 	}
-	.header router-link{
+	/*.header router-link{
 		margin : 0 10px 0 10px;
 		text-align: center;
 		font-size: 1.5em;
 		padding : 10px 0 0 0;
-	}
+	}*/
     .header .router-link-exact-active{
-        color : #354953;
+        color : white;
+        margin : 0 10px 0 10px;
+		text-align: center;
+		font-size: 1.5em;
+		padding : 10px 0 0 0;
+        text-decoration: none;
     }
     .header a{
-        color : black;
+        color : white;
+        color : white;
+        margin : 0 10px 0 10px;
+		text-align: center;
+		font-size: 1.5em;
+		padding : 10px 0 0 0;
+        text-decoration: none;
     }
 </style>

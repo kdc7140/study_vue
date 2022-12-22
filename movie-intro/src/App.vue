@@ -1,24 +1,28 @@
 <template>
-  <mainHeader></mainHeader>
-  <div id="mainImage">
-    <img alt="Vue logo" src="./assets/mainImage.png">
+  <div>
+    <main-header></main-header>
+    <div id="mainImage">
+      <img alt="Vue logo" src="./assets/mainImage.png">
+    </div>
+    
+    <!--<MainPage></MainPage>-->
+    <router-view></router-view>
+    <main-footer></main-footer>
   </div>
   
-  <MainPage></MainPage>
-  <MainFooter></MainFooter>
 </template>
 
 <script>
 
-import MainPage from './components/MainPage.vue';
+//import MainPage from './components/MainPage.vue';
 import mainHeader from './components/MainHeader.vue';
-import MainFooter from './components/MainFooter.vue';
+import mainFooter from './components/MainFooter.vue';
 
 export default {
   components: {
-    MainPage,
+    //MainPage,
     mainHeader,
-    MainFooter
+    mainFooter
   }
 }
 </script>
