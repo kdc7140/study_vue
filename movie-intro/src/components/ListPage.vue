@@ -6,9 +6,9 @@
 				<img src="../assets/doctor.png">
 				<div>
 					<p>영화명 : {{ item.movieNm }}</p>
-					<p>영화명 미션임파서블</p>
-					<p>영화명 미션임파서블</p>
-					<p>영화명 미션임파서블영화명 미션임파서블영화명 미션임파서블영화명 미션임파서블영화명 미션임파서블영화명 미션임파서블영화명</p>
+					<p>개봉일 : {{ item.openDt }}</p>
+					<p>누적 관객 : {{ item.audiAcc }}</p>
+					<p>예매 순위 : {{ item.rank }}</p>
 				</div>
 			</li>
 		</ul>
@@ -30,11 +30,7 @@ export default {
 	created() {
 		callMovieList()
 			.then(result => {
-				console.log(result.data.boxOfficeResult.dailyBoxOfficeList);
 				this.movieList = result.data.boxOfficeResult.dailyBoxOfficeList;
-				this.testText = "ㅁㅁㅁ";
-				console.log(this.movieList);
-				console.log(this.testText);
 			})
 			.catch(error => {
 				console.log(error);
@@ -52,7 +48,7 @@ export default {
 }
 
 #listView ul {
-	display : block;
+	display : inline-block;
 	padding : 30px;
 	padding-top : 0;
 	margin-block-start : 0;
@@ -67,6 +63,9 @@ export default {
 	text-align: left;
 	margin : 0 0 0 30px;
 	padding : 20px;
+	justify-content: center;
+	align-items: center;
+
 }
 
 #listView img{

@@ -1,8 +1,17 @@
 <template>
   <div class="header">
 	<img src="../assets/logo.png">
-    <router-link to="/list">리스트로 보기</router-link>
-    <router-link to="#">이미지로 보기</router-link>
+    <div class="headerMenu">
+        <router-link to="/list">영화</router-link>
+        <router-link to="#">드라마</router-link>
+    </div>
+    <div class="searchMenu">
+        <input placeholder="검색어를 입력하세요." id="inputSearch">
+        <div id="btnSearch"></div>    
+    </div>
+    
+
+    
 
   </div>
 </template>
@@ -26,13 +35,18 @@ export default {
 		object-position: center left;
 		margin: 0 10px 0 10px; 
 	}
-	/*.header router-link{
-		margin : 0 10px 0 10px;
-		text-align: center;
-		font-size: 1.5em;
-		padding : 10px 0 0 0;
-	}*/
-    .header .router-link-exact-active{
+    .headerMenu{
+        width : 55%;
+        text-align: left;
+        padding : 10px;
+    }
+    .searchMenu{
+        width : 30%;
+        display: flex;
+        /*position: right;*/
+        text-align: right;
+    }
+    .header .headerMenu .router-link-exact-active{
         color : white;
         margin : 0 10px 0 10px;
 		text-align: center;
@@ -40,7 +54,7 @@ export default {
 		padding : 10px 0 0 0;
         text-decoration: none;
     }
-    .header a{
+    .header .headerMenu a{
         color : white;
         color : white;
         margin : 0 10px 0 10px;
@@ -48,5 +62,20 @@ export default {
 		font-size: 1.5em;
 		padding : 10px 0 0 0;
         text-decoration: none;
+    }
+    .searchMenu #inputSearch{
+        /*object-position: center rigth;*/
+        margin : 10px;
+        height : 30px;
+        width : 60%;
+    }
+    .searchMenu #btnSearch{
+        position: right;
+        background-image: url(../assets/icon_search.png);
+        background-size: cover;
+        margin : 10px;
+        
+        width : 30px;
+        height : 30px;
     }
 </style>

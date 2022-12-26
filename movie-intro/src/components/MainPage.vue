@@ -1,5 +1,8 @@
 <template>
   <div id="mainApp">
+    <div id="mainImage">
+      <img alt="Vue logo" src="../assets/mainImage.png">
+    </div>
     <div id="witchingListTitle">
       시청중인 목록
     </div>
@@ -26,10 +29,24 @@
 </template>
 
 <script>
+
+//import commonUtil from '../common/common.util.js';
+
 export default {
   name: 'HelloWorldd',
   props: {
     //msg: String
+  },
+  data (){
+    console.log(this.$getSum(10,20));
+
+    return {
+      data : "MAIN"
+    }
+  },
+  created(){
+    //console.log("BB");
+    //this.$testFn("CC");
   }
 }
 </script>
@@ -40,6 +57,15 @@ export default {
   background-color: black;
   text-align: left;
   color : white;
+}
+
+#mainImage{
+  width : 100%;
+  background-color: black;
+}
+#mainImage img{
+  width : 100%;
+  object-fit: scale-down;
 }
 
 #witchingListTitle{

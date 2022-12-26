@@ -1,11 +1,6 @@
 <template>
   <div>
     <main-header></main-header>
-    <div id="mainImage">
-      <img alt="Vue logo" src="./assets/mainImage.png">
-    </div>
-    
-    <!--<MainPage></MainPage>-->
     <router-view></router-view>
     <main-footer></main-footer>
   </div>
@@ -43,12 +38,5 @@ export default {
 .footer{
   height : 10%;
 }
-#mainImage{
-  width : 100%;
-  background-color: black;
-}
-#mainImage img{
-  width : 100%;
-  object-fit: scale-down;
-}
+
 </style>
