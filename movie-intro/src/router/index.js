@@ -5,6 +5,7 @@ import { createWebHistory, createRouter } from "vue-router";
 //import VueRouter from "vue-router";
 import MainPage from "../components/MainPage.vue";
 import ListPage from "../components/ListPage.vue";
+import ChartPage from "../components/ChartPage.vue";
 
 //Vue.use(VueRouter);
 
@@ -43,6 +44,11 @@ const routes = [
         name: "list",
         component: ListPage,
     },
+    {
+        path : "/chart",
+        name: "chart",
+        component : ChartPage,
+    }
 ];
 
 const router = createRouter({

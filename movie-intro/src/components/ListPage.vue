@@ -18,7 +18,7 @@
 
 <script>
 
-import { callMovieList } from '../api/index.js';
+//import { callMovieList } from '../api/index.js';
 
 export default {
 	data () {
@@ -28,8 +28,9 @@ export default {
 		}		
 	},
 	created() {
-		callMovieList()
+		this.$callMovieList()
 			.then(result => {
+				console.log(result);
 				this.movieList = result.data.boxOfficeResult.dailyBoxOfficeList;
 			})
 			.catch(error => {
