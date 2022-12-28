@@ -3,22 +3,35 @@
 	<img src="../assets/logo.png">
     <div class="headerMenu">
         <router-link to="/list">영화</router-link>
-        <router-link to="#">드라마</router-link>
+        <router-link to="/chart">드라마</router-link>
     </div>
     <div class="searchMenu">
-        <input placeholder="검색어를 입력하세요." id="inputSearch">
-        <div id="btnSearch"></div>    
+        <input placeholder="검색어를 입력하세요." id="inputSearch" v-model="inputText">
+        <div id="btnSearch" v-on:click='click'></div>
     </div>
-    
-
-    
-
   </div>
 </template>
 
 <script>
 export default {
+    
+    data(){
+        return{
+            inputText : "",
+        }
+    },
+    methods : {
+        click(){ 
+            console.log(this.inputText);
+            this.$router.push({
+                path : "/list",
+                query : {
+                    searchText : this.inputText
+                }
+            });
+        },
 
+    }
 }
 </script>
 

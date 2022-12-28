@@ -24,10 +24,11 @@ export default {
 	data () {
 		return {
 			movieList : [],
-			testText : "",
+			searchTxt : "",
 		}		
 	},
 	created() {
+		console.log("creatred");
 		this.$callMovieList()
 			.then(result => {
 				console.log(result);
@@ -36,6 +37,25 @@ export default {
 			.catch(error => {
 				console.log(error);
 			});
+	},
+	mounted(){
+		const { searchText } = this.$route.query;
+		this.searchTxt = searchText;
+		console.log("검색어 : ", this.searchTxt);
+	},
+	methods : {
+
+		movieSearch(){
+            console.log("AA");
+            this.$searchMovieList().get("/v1/search/movie.json?query="+ this.inputText)
+                .then(result => {
+                    console.log(result);
+
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
 	}
 }
 </script>

@@ -2,10 +2,19 @@ import App from "./App.vue";
 //import Vue from "vue";
 import router from "./router/index.js";
 import common from './common/common.util.js';
+import api from './api/index.js';
+
+import CKEditor from "@ckeditor/ckeditor5-vue";
 
 import { createApp } from 'vue';
 
-createApp(App).use(router).use(common).mount("#app");
+
+createApp(App)
+	.use(router)
+	.use(common)
+	.use(api)
+	.use(CKEditor)
+	.mount("#app");
 
 //new Vue({
 //    render: (h) => h(App),

@@ -1,4 +1,7 @@
 import axios from 'axios';
+//axios.defaults.baseURL = "http://localhost:8080";
+//axios.defaults.headers.get["Content-Type"] = "application/json;charset=utf-8";
+//axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
 
 export default {
     install(Vue) {
@@ -11,37 +14,19 @@ export default {
             );
         };
 
-        Vue.config.globalProperties.$searchMovieList = async function (word) {
-            console.log(word);
-            //let searchUrl = 'https://openapi.naver.com/v1/search/movie.json?country=KR&query="' + word + '"';
-            let searchUrl = 'https://openapi.naver.com/v1/search/movie.json?query="라라랜드"';
-            console.log(searchUrl);
-            try {
-                const result = await axios.get(searchUrl, {
-                    headers: {
-                        "X-Naver-Client-Id": "GlaGYwsP6sOQdEvfdTEi",
-                        "X-Naver-Client-Secret": "BFfJfKfhlW",
-                        "Access-Control-Allow-Origin": "*",
-                        "Access-Control-Allow-Headers" : "X-Requested-With"
-                    },
-                });
-                console.log(result);
-                result;
-            } catch (error) {
-                console.log(error);
-            }
-        };
 
-        Vue.config.globalProperties.$searchList = (word) => {
-            console.log("$searchList", word);
+        Vue.config.globalProperties.$searchMovieList = () => {
+            console.log("$searchList");
             return axios.create({
                 withCredentials: true, // send cookies when cross-domain requests
                 timeout: 5000,
                 headers: {
                     // 헤더 세팅
-                    Accept: "application/json",
+                    //Accept: "application/json",
                     "X-Naver-Client-Id": "GlaGYwsP6sOQdEvfdTEi",
                     "X-Naver-Client-Secret": "BFfJfKfhlW",
+                    //"Access-Control-Allow-Origin": "*",
+                    //"Access-Control-Allow-Headers": "X-Requested-With",
                 },
                 proxy: {
                     // url 리소스를 추가해주자
