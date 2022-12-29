@@ -1,7 +1,19 @@
 <template>
   <div id="listView">
+	<h2> '{{ this.searchTxt }}' 검색결과...</h2>
 	<table>
-		<ul>
+		<ul v-if = "this.searchTxt">
+			<li v-for="item in this.movieList" :key="item">
+				<img :src =  item.image >
+				<div>
+					<p>영화명 : {{ item.title }}</p>
+					<p>출연  : {{ item.actor }}</p>
+					<p>평점 : {{ item.userRating }}</p>
+					<p>감독 : {{ item.director }}</p>
+				</div>
+			</li>
+		</ul>
+		<ul v-else>
 			<li v-for="item in this.movieList" :key="item">
 				<img src="../assets/doctor.png">
 				<div>
@@ -25,31 +37,48 @@ export default {
 		return {
 			movieList : [],
 			searchTxt : "",
+			imgUrl : "",
 		}		
 	},
 	created() {
 		console.log("creatred");
-		this.$callMovieList()
-			.then(result => {
-				console.log(result);
-				this.movieList = result.data.boxOfficeResult.dailyBoxOfficeList;
-			})
-			.catch(error => {
-				console.log(error);
-			});
+		//this.$callMovieList()
+		//	.then(result => {
+		//		console.log(result);
+		//		this.movieList = result.data.boxOfficeResult.dailyBoxOfficeList;
+		//	})
+		//	.catch(error => {
+		//		console.log(error);
+		//	});
 	},
 	mounted(){
+		console.log("mounted");
 		const { searchText } = this.$route.query;
 		this.searchTxt = searchText;
 		console.log("검색어 : ", this.searchTxt);
+		
+		if(this.searchTxt === ""){
+			this.$callMovieList()
+				.then(result => {
+					console.log(result);
+					this.movieList = result.data.boxOfficeResult.dailyBoxOfficeList;
+				})
+				.catch(error => {
+					console.log(error);
+				});
+		}else{
+			this.movieSearch();
+		}
+	},
+	updated(){
+
 	},
 	methods : {
-
 		movieSearch(){
-            console.log("AA");
-            this.$searchMovieList().get("/v1/search/movie.json?query="+ this.inputText)
+            this.$searchMovieList().get("/v1/search/movie.json?query="+ this.searchTxt)
                 .then(result => {
-                    console.log(result);
+                    console.log(result.data.items);
+					this.movieList = result.data.items;
 
                 })
                 .catch(error => {
@@ -61,6 +90,13 @@ export default {
 </script>
 
 <style>
+
+h2{
+	margin-block-start : 0;
+	margin-block-end : 0;
+	padding : 50px 20px 50px 70px;
+	text-align: left;
+}
 
 #listView{
 	background-color: black;
@@ -90,9 +126,10 @@ export default {
 }
 
 #listView img{
-	width : 300px;
-	height : 200px;
+	width : 250px;
+	height : 350px;
 	padding : 20px;
+	object-fit: contain;
 }
 
 </style>
