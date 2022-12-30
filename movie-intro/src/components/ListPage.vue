@@ -77,7 +77,7 @@ export default {
 		movieSearch(){
             this.$searchMovieList().get("/v1/search/movie.json?query="+ this.searchTxt)
                 .then(result => {
-                    console.log(result.data.items);
+                    console.log(result.data);
 					this.movieList = result.data.items;
 
                 })
