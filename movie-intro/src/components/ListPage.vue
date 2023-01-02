@@ -1,6 +1,6 @@
 <template>
   <div id="listView">
-	<h2> '{{ this.searchTxt }}' 검색결과...</h2>
+	<h2 v-if = "this.searchTxt" > '{{ this.searchTxt }}' 검색결과...</h2>
 	<table>
 		<ul v-if = "this.searchTxt">
 			<li v-for="item in this.movieList" :key="item">
@@ -15,7 +15,7 @@
 		</ul>
 		<ul v-else>
 			<li v-for="item in this.movieList" :key="item">
-				<img src="../assets/doctor.png">
+				<img src="../assets/vertical_image.png">
 				<div>
 					<p>영화명 : {{ item.movieNm }}</p>
 					<p>개봉일 : {{ item.openDt }}</p>
@@ -31,6 +31,8 @@
 <script>
 
 //import { callMovieList } from '../api/index.js';
+import { searchMovieList } from '../store/store.js';
+import { mapState } from 'pinia';
 
 export default {
 	data () {
@@ -70,8 +72,10 @@ export default {
 			this.movieSearch();
 		}
 	},
-	updated(){
-
+	computed : {
+		...mapState('list', [
+			searchMovieList
+		]),
 	},
 	methods : {
 		movieSearch(){
