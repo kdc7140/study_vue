@@ -30,10 +30,6 @@
 
 <script>
 
-//import { callMovieList } from '../api/index.js';
-import { searchMovieList } from '../store/store.js';
-import { mapState } from 'pinia';
-
 export default {
 	data () {
 		return {
@@ -44,14 +40,6 @@ export default {
 	},
 	created() {
 		console.log("creatred");
-		//this.$callMovieList()
-		//	.then(result => {
-		//		console.log(result);
-		//		this.movieList = result.data.boxOfficeResult.dailyBoxOfficeList;
-		//	})
-		//	.catch(error => {
-		//		console.log(error);
-		//	});
 	},
 	mounted(){
 		console.log("mounted");
@@ -59,7 +47,7 @@ export default {
 		this.searchTxt = searchText;
 		console.log("검색어 : ", this.searchTxt);
 		
-		if(this.searchTxt === ""){
+		if(this.searchTxt === undefined){
 			this.$callMovieList()
 				.then(result => {
 					console.log(result);
@@ -69,26 +57,12 @@ export default {
 					console.log(error);
 				});
 		}else{
-			this.movieSearch();
+			this.searchTxt = this.$store.state.searchWord;
+			this.$store.commit("movieSearch", this.inputText);
 		}
 	},
-	computed : {
-		...mapState('list', [
-			searchMovieList
-		]),
-	},
 	methods : {
-		movieSearch(){
-            this.$searchMovieList().get("/v1/search/movie.json?query="+ this.searchTxt)
-                .then(result => {
-                    console.log(result.data);
-					this.movieList = result.data.items;
 
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
 	}
 }
 </script>

@@ -1,22 +1,34 @@
-import Vue from "vue";
-import { defineStore } from "pinia";
+// store/index.js
+import { createStore } from "vuex";
 
-Vue.use(Vue);
-
-export const searchMovieList = defineStore("list", {
-    state: () => ({
+export default createStore({
+    state: {
+        counter: 10,
+        searchWord: "",
         searchList: [],
-    }),
-    actions: {
-        searchMovie(param) {
-            this.searchList.push(param);
-        },
-        //addList: (param) => this.list.push(param);
     },
     getters: {
-        getAllList(state) {
-            return state.list;
+        time2(state) {
+            console.log("getters", state);
+            return state.counter * 2;
         },
-        //getAllList: (state) => state.list
+    },
+    mutations: {
+        setCounter(state, value) {
+            console.log("mutations", state, value);
+            state.counter = value;
+        },
+        movieSearch() {
+            console.log('storeCall');
+            this.$searchMovieList()
+                .get("/v1/search/movie.json?query=" + this.searchWord)
+                .then((result) => {
+                    console.log(result.data);
+                    this.movieList = result.data.items;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
     },
 });

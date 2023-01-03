@@ -6,6 +6,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import MainPage from "../components/MainPage.vue";
 import ListPage from "../components/ListPage.vue";
 import ChartPage from "../components/ChartPage.vue";
+import TestPage from "../components/TestPage.vue";
 
 //Vue.use(VueRouter);
 
@@ -45,10 +46,15 @@ const routes = [
         component: ListPage,
     },
     {
-        path : "/chart",
+        path: "/chart",
         name: "chart",
-        component : ChartPage,
-    }
+        component: ChartPage,
+    },
+    {
+        path: "/test",
+        name: "test",
+        component: TestPage,
+    },
 ];
 
 const router = createRouter({

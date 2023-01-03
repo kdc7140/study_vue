@@ -4,6 +4,7 @@
     <div class="headerMenu">
         <router-link to="/list">영화</router-link>
         <router-link to="/chart">드라마</router-link>
+        <router-link to="/test">테스트</router-link>
     </div>
     <div class="searchMenu">
         <input placeholder="검색어를 입력하세요." id="inputSearch" v-model="inputText">
@@ -13,8 +14,11 @@
 </template>
 
 <script>
+
+//import { computed } from "vue";
+//import { useStore } from "vuex";
+
 export default {
-    
     data(){
         return{
             inputText : "",
@@ -23,12 +27,21 @@ export default {
     methods : {
         click(){ 
             console.log(this.inputText);
-            this.$router.push({
-                path : "/list",
-                query : {
-                    searchText : this.inputText
-                }
-            });
+            var _thisPage = window.location.href;
+
+            if(_thisPage.indexOf('list') > 0){
+                this.$store.state.searchWord = this.inputText;
+                this.$store.commit("movieSearch", this.inputText);
+            }else{
+                this.$router.push({
+                    path : "/list",
+                    query : {
+                        searchText : this.inputText
+                    }
+                });
+            }
+
+            
         },
 
     }

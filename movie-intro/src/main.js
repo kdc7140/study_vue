@@ -3,20 +3,25 @@ import App from "./App.vue";
 import router from "./router/index.js";
 import common from './common/common.util.js';
 import api from './api/index.js';
-import { createPinia } from 'pinia';
+import vuex from "vuex";
+import store from './store/store.js';
+
+import { createApp } from 'vue';
+
+
 
 import CKEditor from "@ckeditor/ckeditor5-vue";
 
-import { createApp } from 'vue';
+
 
 
 createApp(App)
     .use(router)
     .use(common)
     .use(api)
-    .use(createPinia)
+    .use(vuex)
+    .use(store)
     .use(CKEditor)
-
     .mount("#app");
 
 //new Vue({
