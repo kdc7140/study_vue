@@ -38,8 +38,6 @@ export default {
     //msg: String
   },
   data (){
-    console.log(this.$getSum(10,20));
-
     return {
       data : "MAIN"
     }
@@ -47,6 +45,9 @@ export default {
   created(){
     //console.log("BB");
     //this.$testFn("CC");
+  },
+  mounted(){
+    console.log("AA");
   }
 }
 </script>

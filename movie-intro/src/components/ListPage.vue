@@ -14,7 +14,7 @@
 			</li>
 		</ul>
 		<ul v-else>
-			<li v-for="item in this.movieList" :key="item">
+			<li v-for="item in this.movieList" :key="item.moiveCd">
 				<img src="../assets/vertical_image.png">
 				<div>
 					<p>영화명 : {{ item.movieNm }}</p>
@@ -30,6 +30,8 @@
 
 <script>
 
+import commonUtil from '../common/common.util.js';
+
 export default {
 	data () {
 		return {
@@ -40,6 +42,7 @@ export default {
 	},
 	created() {
 		console.log("creatred");
+		commonUtil.testFunc();
 	},
 	mounted(){
 		console.log("mounted");
@@ -48,7 +51,8 @@ export default {
 		console.log("검색어 : ", this.searchTxt);
 		
 		if(this.searchTxt === undefined){
-			this.$callMovieList()
+			//this.$callMovieList()
+			commonUtil.callList()
 				.then(result => {
 					console.log(result);
 					this.movieList = result.data.boxOfficeResult.dailyBoxOfficeList;
