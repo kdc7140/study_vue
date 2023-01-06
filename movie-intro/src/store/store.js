@@ -34,13 +34,13 @@
 //});
 
 
-import { callMovieList } from "@/api";
+import { callMovieList, searchMovieList } from "@/api";
 import Vue from "vue";
 import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+export const store = new Vuex.Store({
     state: {
         counter: 10,
         searchWord: "",
@@ -54,32 +54,36 @@ export default new Vuex.Store({
     },
     actions: {
         callMovie(context) {
+            console.log("actions movie");
             callMovieList().then((result) => {
                 console.log(result);
-                context.commit("setMovieList", result.data.boxOfficeResult.dailyBoxOfficeList);
+                context.commit(
+                    "setMovieList",
+                    result.data.boxOfficeResult.dailyBoxOfficeList
+                );
             });
         },
-    },
-    mutations: {
-        setMovieList(state, data) {
-            console.log("mutations");
-            state.searchList = data;
-        },
-        setCounter(state, value) {
-            console.log("mutations", state, value);
-            state.counter = value;
-        },
-        movieSearch() {
-            console.log("storeCall");
-            this.$searchMovieList()
-                .get("/v1/search/movie.json?query=" + this.searchWord)
+        callNaverMovie(context) {
+            console.log("actinos naver", this.state.searchWord);
+            searchMovieList()
+                .get("/v1/search/movie.json?query=" + this.state.searchWord)
                 .then((result) => {
                     console.log(result.data);
-                    this.movieList = result.data.items;
+                    context.commit("setMovieList", result.data.items);
                 })
                 .catch((error) => {
                     console.log(error);
                 });
+        },
+    },
+    mutations: {
+        setMovieList(state, value) {
+            console.log("mutations", state, value);
+            state.searchList = value;
+        },
+        setCounter(state, value) {
+            console.log("mutations", state, value);
+            state.counter = value;
         },
     },
 });

@@ -31,7 +31,7 @@ export default {
 
             if(_thisPage.indexOf('list') > 0){
                 this.$store.state.searchWord = this.inputText;
-                //this.$store.commit("movieSearch", this.inputText);
+                this.$store.dispatch("callNaverMovie", this.inputText);
             }else{
                 this.$router.push({
                     path : "/list",

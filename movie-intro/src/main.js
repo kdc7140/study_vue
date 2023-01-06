@@ -4,7 +4,7 @@ import { router } from "./router/index.js";
 import common from './common/common.util.js';
 import { callMovieList, searchMovieList } from './api/index.js';
 import vuex from "vuex";
-import  Store  from "./store/store.js";
+import { store }  from "@/store/store.js"
 
 Vue.config.productionTip = false;
 
@@ -34,5 +34,5 @@ new Vue({
     callMovieList,
     searchMovieList,
     vuex,
-    Store,
+    store,
 }).$mount("#app");

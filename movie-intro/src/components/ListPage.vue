@@ -3,7 +3,7 @@
 	<h2 v-if = "this.searchTxt" > '{{ this.searchTxt }}' 검색결과...</h2>
 	<table>
 		<ul v-if = "this.searchTxt">
-			<li v-for="item in this.movieList" :key="item">
+			<li v-for="item in this.movieList" :key="item.title">
 				<img :src =  item.image >
 				<div>
 					<p>영화명 : {{ item.title }}</p>
