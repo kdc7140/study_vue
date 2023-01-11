@@ -3,7 +3,7 @@
 	<img src="../assets/logo.png">
     <div class="headerMenu">
         <router-link to="/list">영화</router-link>
-        <router-link to="/chart">드라마</router-link>
+        <router-link to="/chart">차트</router-link>
         <router-link to="/test">테스트</router-link>
     </div>
     <div class="searchMenu">
@@ -30,7 +30,7 @@ export default {
             var _thisPage = window.location.href;
 
             if(_thisPage.indexOf('list') > 0){
-                this.$store.state.searchWord = this.inputText;
+                //this.$store.state.searchWord = this.inputText;
                 this.$store.dispatch("callNaverMovie", this.inputText);
             }else{
                 this.$router.push({
@@ -94,6 +94,7 @@ export default {
         margin : 10px;
         height : 30px;
         width : 60%;
+        color : black;
     }
     .searchMenu #btnSearch{
         position: right;

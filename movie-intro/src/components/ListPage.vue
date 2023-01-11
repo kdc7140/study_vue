@@ -4,7 +4,7 @@
 	<table>
 		<ul v-if = "this.searchTxt">
 			<li v-for="item in this.movieList" :key="item.title">
-				<img :src =  item.image >
+				<img :src =  item.image>
 				<div>
 					<p>영화명 : {{ item.title }}</p>
 					<p>출연  : {{ item.actor }}</p>
@@ -15,7 +15,7 @@
 		</ul>
 		<ul v-else>
 			<li v-for="item in this.movieList" :key="item.moiveCd">
-				<img src="../assets/vertical_image.png">
+				<img src="../assets/vertical_image.png" v-on:click="moveToDatail" v-bind:data-cd=item.movieCd>
 				<div>
 					<p>영화명 : {{ item.movieNm }}</p>
 					<p>개봉일 : {{ item.openDt }}</p>
@@ -35,39 +35,42 @@ import commonUtil from '../common/common.util.js';
 export default {
 	data () {
 		return {
-			movieList : [],
-			searchTxt : "",
+			searchTxt : this.$store.getters['searchWord'],
 			imgUrl : "",
+			movieCd : "",
 		}		
 	},
 	created() {
-		console.log("creatred");
 		commonUtil.testFunc();
 	},
 	mounted(){
-		console.log("mounted");
 		const { searchText } = this.$route.query;
 		this.searchTxt = searchText;
 		console.log("검색어 : ", this.searchTxt);
 		
-		if(this.searchTxt === undefined){
-			//this.$callMovieList()
-			commonUtil.callList()
-				.then(result => {
-					console.log(result);
-					this.movieList = result.data.boxOfficeResult.dailyBoxOfficeList;
-				})
-				.catch(error => {
-					console.log(error);
-				});
+		if(this.searchTxt === "" || this.searchTxt == undefined){
+			this.$store.dispatch("callMovie");
 		}else{
-			this.searchTxt = this.$store.state.searchWord;
-			this.$store.commit("movieSearch", this.inputText);
+			this.$store.dispatch("callNaverMovie", this.searchTxt);
 		}
 	},
+	computed : {
+		movieList() {
+			return this.$store.getters['getMovieList'];
+		},
+	},
 	methods : {
-
-	}
+		moveToDatail(event){
+			console.log(event.target.getAttribute('data-cd'));
+			this.movieCd = event.target.getAttribute('data-cd');
+			this.$router.push({
+                    path : "/detail",
+                    query : {
+                        movieCd : this.movieCd
+                    }
+                });
+		}
+	},
 }
 </script>
 
@@ -100,10 +103,11 @@ h2{
 
 #listView ul li div{
 	text-align: left;
-	margin : 0 0 0 30px;
+	margin : 20px 0 0 30px;
 	padding : 20px;
 	justify-content: center;
 	align-items: center;
+	font-size : 18px;
 
 }
 

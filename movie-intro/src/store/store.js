@@ -1,38 +1,3 @@
-// store/index.js
-//import { createStore } from "vuex";
-
-//export default createStore({
-//    state: {
-//        counter: 10,
-//        searchWord: "",
-//        searchList: [],
-//    },
-//    getters: {
-//        time2(state) {
-//            console.log("getters", state);
-//            return state.counter * 2;
-//        },
-//    },
-//    mutations: {
-//        setCounter(state, value) {
-//            console.log("mutations", state, value);
-//            state.counter = value;
-//        },
-//        movieSearch() {
-//            console.log('storeCall');
-//            this.$searchMovieList()
-//                .get("/v1/search/movie.json?query=" + this.searchWord)
-//                .then((result) => {
-//                    console.log(result.data);
-//                    this.movieList = result.data.items;
-//                })
-//                .catch((error) => {
-//                    console.log(error);
-//                });
-//        },
-//    },
-//});
-
 
 import { callMovieList, searchMovieList } from "@/api";
 import Vue from "vue";
@@ -45,12 +10,18 @@ export const store = new Vuex.Store({
         counter: 10,
         searchWord: "",
         searchList: [],
+        movieInfo : "",
     },
     getters: {
-        time2(state) {
-            console.log("getters", state);
-            return state.counter * 2;
+        getMovieList(state) {
+            return state.searchList;
         },
+        searchTxt(state) {
+            return state.searchWord;
+        },
+        getMovieInfo(state) {
+            return state.movieCd;
+        }
     },
     actions: {
         callMovie(context) {
@@ -63,10 +34,10 @@ export const store = new Vuex.Store({
                 );
             });
         },
-        callNaverMovie(context) {
-            console.log("actinos naver", this.state.searchWord);
+        callNaverMovie(context, word) {
+            console.log("actinos naver", word);
             searchMovieList()
-                .get("/v1/search/movie.json?query=" + this.state.searchWord)
+                .get("/v1/search/movie.json?query=" + word)
                 .then((result) => {
                     console.log(result.data);
                     context.commit("setMovieList", result.data.items);
@@ -75,15 +46,14 @@ export const store = new Vuex.Store({
                     console.log(error);
                 });
         },
+
     },
     mutations: {
         setMovieList(state, value) {
-            console.log("mutations", state, value);
+            console.log("mutations", value);
             state.searchList = value;
-        },
-        setCounter(state, value) {
-            console.log("mutations", state, value);
-            state.counter = value;
+            //state.searchWord = value.word;
+            
         },
     },
 });

@@ -1,4 +1,7 @@
-const { defineConfig } = require('@vue/cli-service')
+const { defineConfig } = require('@vue/cli-service');
+const webpack = require("webpack");
+const path = require("path");
+
 module.exports = defineConfig({
     transpileDependencies: true,
     // 개발 서버 설정
@@ -11,5 +14,16 @@ module.exports = defineConfig({
                 target: "https://openapi.naver.com",
             },
         },
+    },
+    configureWebpack: {
+        plugins: [
+            new webpack.ProvidePlugin({
+                // 전역으로 사용할 라이브러리 세
+                $: "jquery",
+                jquery: "jquery",
+                "window.jQuery": "jquery",
+                jQuery: "jquery",
+            }),
+        ],
     },
 });

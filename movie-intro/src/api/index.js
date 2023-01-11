@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Vue from 'vue';
 //axios.defaults.baseURL = "http://localhost:8080";
 //axios.defaults.headers.get["Content-Type"] = "application/json;charset=utf-8";
 //axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
@@ -76,7 +77,13 @@ function searchMovieList() {
 }
 
 
-export {
-    callMovieList,
-    searchMovieList
+Vue.prototype.$detailMovieInfo = function(movieCd) {
+    console.log("api index detail");
+    return axios.get(
+        "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&movieCd=" +
+            movieCd
+    );
 }
+
+
+export { callMovieList, searchMovieList };
