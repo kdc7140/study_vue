@@ -7,6 +7,7 @@ import MainPage from "../components/MainPage.vue";
 import ListPage from "../components/ListPage.vue";
 import ChartPage from "../components/ChartPage.vue";
 import TestPage from "../components/TestPage.vue";
+import DetailPage from "../components/MovieDetail";
 
 Vue.use(VueRouter);
 
@@ -37,6 +38,11 @@ export const router = new VueRouter({
             name: "test",
             component: TestPage,
         },
+        {
+            path: "/detail",
+            //name: "movieDetail",
+            component : DetailPage,
+        }
     ],
 });
 
