@@ -3,7 +3,7 @@
 	<h2 v-if = "this.searchTxt" > '{{ this.searchTxt }}' 검색결과...</h2>
 	<table>
 		<ul v-if = "this.searchTxt">
-			<li v-for="item in this.movieList" :key="item.title">
+			<li v-for="item in getMovieList" :key="item.title">
 				<img :src =  item.image>
 				<div>
 					<p>영화명 : {{ item.title }}</p>
@@ -14,7 +14,7 @@
 			</li>
 		</ul>
 		<ul v-else>
-			<li v-for="item in this.movieList" :key="item.moiveCd">
+			<li v-for="item in getMovieList" :key="item.moiveCd">
 				<img src="../assets/vertical_image.png" v-on:click="moveToDatail" v-bind:data-cd=item.movieCd>
 				<div>
 					<p>영화명 : {{ item.movieNm }}</p>
@@ -31,6 +31,7 @@
 <script>
 
 import commonUtil from '../common/common.util.js';
+import { mapGetters } from 'vuex'
 
 export default {
 	data () {
@@ -55,9 +56,11 @@ export default {
 		}
 	},
 	computed : {
-		movieList() {
-			return this.$store.getters['getMovieList'];
-		},
+		...mapGetters(['getMovieList']),
+		//movieList() {
+		//	return this.$store.getters['getMovieList'];
+			
+		//},
 	},
 	methods : {
 		moveToDatail(event){
