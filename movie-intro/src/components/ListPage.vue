@@ -31,7 +31,7 @@
 <script>
 
 import commonUtil from '../common/common.util.js';
-import { mapGetters } from 'vuex'
+import {  mapGetters } from 'vuex'
 
 export default {
 	data () {
