@@ -1,39 +1,42 @@
 <template>
   <div id="listView">
-	<h2 v-if = "this.searchTxt" > '{{ this.searchTxt }}' 검색결과...</h2>
-	<table>
-		<ul v-if = "this.searchTxt">
-			<li v-for="item in getMovieList" :key="item.title">
-				<img :src =  item.image>
-				<div>
-					<p>영화명 : {{ item.title }}</p>
-					<p>출연  : {{ item.actor }}</p>
-					<p>평점 : {{ item.userRating }}</p>
-					<p>감독 : {{ item.director }}</p>
-				</div>
-			</li>
-		</ul>
-		<ul v-else>
-			<li v-for="item in getMovieList" :key="item.moiveCd">
-				<img src="../assets/vertical_image.png" v-on:click="moveToDatail" v-bind:data-cd=item.movieCd>
-				<div>
-					<p>영화명 : {{ item.movieNm }}</p>
-					<p>개봉일 : {{ item.openDt }}</p>
-					<p>누적 관객 : {{ item.audiAcc }}</p>
-					<p>예매 순위 : {{ item.rank }}</p>
-				</div>
-			</li>
-		</ul>
-	</table>
+		<search-header></search-header>
+		<h2 v-if = "this.searchTxt" > '{{ this.searchTxt }}' 검색결과...</h2>
+		<table>
+			<ul v-if = "this.searchTxt">
+				<li v-for="item in getMovieList" :key="item.title">
+					<img :src =  item.image>
+					<div>
+						<p>영화명 : {{ item.title }}</p>
+						<p>출연  : {{ item.actor }}</p>
+						<p>평점 : {{ item.userRating }}</p>
+						<p>감독 : {{ item.director }}</p>
+					</div>
+				</li>
+			</ul>
+			<ul v-else>
+				<li v-for="item in getMovieList" :key="item.moiveCd">
+					<img src="../assets/vertical_image.png" v-on:click="moveToDatail" v-bind:data-cd=item.movieCd>
+					<div>
+						<p>영화명 : {{ item.movieNm }}</p>
+						<p>개봉일 : {{ item.openDt }}</p>
+						<p>누적 관객 : {{ item.audiAcc }}</p>
+						<p>예매 순위 : {{ item.rank }}</p>
+					</div>
+				</li>
+			</ul>
+		</table>
   </div>
 </template>
 
 <script>
 
 import commonUtil from '../common/common.util.js';
+import searchHeader from './SearchYear.vue';
 import {  mapGetters } from 'vuex'
 
 export default {
+    components: { searchHeader },
 	data () {
 		return {
 			searchTxt : this.$store.getters['searchWord'],
@@ -79,17 +82,18 @@ export default {
 
 <style>
 
+
+
 h2{
 	margin-block-start : 0;
 	margin-block-end : 0;
-	padding : 50px 20px 50px 70px;
+	padding : 30px 20px 50px 40px;
 	text-align: left;
 }
 
 #listView{
 	background-color: black;
 	color : white;
-	
 }
 
 #listView ul {

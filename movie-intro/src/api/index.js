@@ -47,14 +47,14 @@ import axios from 'axios';
  function callMovieList() {
      console.log("api index callMoive");
      return axios.get(
-         "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20120101"
+         "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20230101"
      );
  }
 
 
 function searchMovieList() {
     return axios.create({
-        withCredentials: true, // send cookies when cross-domain requests
+        //withCredentials: true, // send cookies when cross-domain requests
         timeout: 5000,
         headers: {
             // 헤더 세팅
@@ -70,7 +70,7 @@ function searchMovieList() {
                 // 해당 리소스가 있는 url일 경우 타겟으로 baseURL을 변경
                 target: "https://openapi.naver.com",
                 // 기본 베이스URL을 바꿔줄지 여부
-                changeOrigin: true,
+                //changeOrigin: true,
             },
         },
     });
