@@ -9,6 +9,9 @@
 <body>
     <div id="app">
         {{ num }}<button v-on:click="addNum">increase</button>
+        {{ doubleNum }}
+        <p>원본 메시지: "{{ message }}"</p>
+        <p>역순으로 표시한 메시지: "{{ reversedMessage }}"</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -18,20 +21,28 @@
             el : '#app',
             data : {
                 num : 10,
+                message : 'hello',
             },
             computed : {
                 doubleNum : function(){
+                    console.log('computed');
                     return this.num * 2;
+                },
+                reversedMessage: function () {
+                    console.log('reverse');
+                    return this.message.split('').reverse().join('')
                 }
             },
             watch : {
-                num : function(newValue){
+                num : function(newValue, oldValue){
+                    console.log(newValue, oldValue);
                     this.fetchUserByNumber(newValue);
                 }
             },
             methods : {
                 addNum : function(){
                     this.num = this.num+1
+                    console.log('addNum');
                 },
                 logText : function(){
                     console.log('changed');

@@ -24,6 +24,10 @@ export default {
             inputText : "",
         }
     },
+    mounted(){
+        console.log(this.sendNum);
+        console.log(this.$test);
+    },
     methods : {
         click(){ 
             console.log(this.inputText);
@@ -40,15 +44,15 @@ export default {
                     }
                 });
             }
-
-            
         },
-
     }
 }
 </script>
 
 <style scoped>
+    .searchMenu h1{
+        color:white;
+    }
     .header{
         color : white;
         background-color: black;

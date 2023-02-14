@@ -1,9 +1,10 @@
 <template>
   <div id="listView">
-		<search-header></search-header>
-		<h2 v-if = "this.searchTxt" > '{{ this.searchTxt }}' 검색결과...</h2>
+		<search-header :sendNum="testNum" @child="changeYearSearch"></search-header>
+		<h2 v-if = "this.searchTxt" > '{{ getSearchTxt }}' 검색결과...</h2>
+		<button @click="test()">테스트 버튼</button>
 		<table>
-			<ul v-if = "this.searchTxt">
+			<ul v-if = this.searchTxt>
 				<li v-for="item in getMovieList" :key="item.title">
 					<img :src =  item.image>
 					<div>
@@ -16,7 +17,8 @@
 			</ul>
 			<ul v-else>
 				<li v-for="item in getMovieList" :key="item.moiveCd">
-					<img src="../assets/vertical_image.png" v-on:click="moveToDatail" v-bind:data-cd=item.movieCd>
+					<img :src=item.image @click="moveToDatail" v-bind:data-cd=item.movieCd>
+					<!--<img src="../assets/2014_01.png" v-on:click="moveToDatail" v-bind:data-cd=item.movieCd>-->
 					<div>
 						<p>영화명 : {{ item.movieNm }}</p>
 						<p>개봉일 : {{ item.openDt }}</p>
@@ -40,8 +42,10 @@ export default {
 	data () {
 		return {
 			searchTxt : this.$store.getters['searchWord'],
+			searchYear : 0,
 			imgUrl : "",
 			movieCd : "",
+			testNum : 1,
 		}		
 	},
 	created() {
@@ -53,16 +57,15 @@ export default {
 		console.log("검색어 : ", this.searchTxt);
 		
 		if(this.searchTxt === "" || this.searchTxt == undefined){
-			this.$store.dispatch("callMovie");
+			this.$store.dispatch("callMovie", '20140101');
 		}else{
 			this.$store.dispatch("callNaverMovie", this.searchTxt);
 		}
 	},
 	computed : {
-		...mapGetters(['getMovieList']),
+		...mapGetters(['getMovieList', 'getSearchTxt']),
 		//movieList() {
 		//	return this.$store.getters['getMovieList'];
-			
 		//},
 	},
 	methods : {
@@ -70,12 +73,22 @@ export default {
 			console.log(event.target.getAttribute('data-cd'));
 			this.movieCd = event.target.getAttribute('data-cd');
 			this.$router.push({
-                    path : "/detail",
-                    query : {
-                        movieCd : this.movieCd
-                    }
-                });
-		}
+					path : "/detail",
+					query : {
+							movieCd : this.movieCd
+					}
+			});
+		},
+		test(){
+			this.testNum += 1;
+			console.log(this.testNum);
+		},
+		changeYearSearch(year){
+			console.log(year);
+			this.searchTxt = "";
+			this.searchYear = year;
+			this.$store.dispatch("callMovie", year);
+		},
 	},
 }
 </script>

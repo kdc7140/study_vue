@@ -26,7 +26,7 @@ export default {
 
 .footer div{
 	display: inline-block;
-	padding : 20px 150px 20px 150px;
+	padding : 20px 80px 20px 80px;
 	/*width : 10%;*/
 }
 

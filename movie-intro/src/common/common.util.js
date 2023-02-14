@@ -1,4 +1,5 @@
 import axios from "axios";
+import Vue from 'vue';
 
 //export default {
 //    install(Vue) {
@@ -18,6 +19,8 @@ import axios from "axios";
 //    },
 
 //}
+
+Vue.prototype.$test = "ABC";
 
 
 export default class commonUtil{
